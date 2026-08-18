@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200" role="img" aria-labelledby="title desc">
+  <title id="title">Small island. Big systems.</title>
+  <desc id="desc">Social sharing card for Ben Capriata, a health information systems specialist in Port of Spain, Trinidad and Tobago.</desc>
+  <rect width="1200" height="1200" fill="#EEF0E9"/>
+  <rect x="74" y="70" width="1052" height="2" fill="#0D3B3C" opacity=".25"/>
+  <text x="78" y="120" fill="#06222A" opacity=".72" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17" letter-spacing="5">THE CLAIM</text>
+  <text x="70" y="270" fill="#06222A" font-family="Impact, Haettenschweiler, Arial Narrow Bold, sans-serif" font-size="116" font-weight="900" letter-spacing="-1">SMALL ISLAND.</text>
+  <text x="70" y="394" fill="#FF7A38" font-family="Impact, Haettenschweiler, Arial Narrow Bold, sans-serif" font-size="116" font-weight="900" letter-spacing="-1">BIG SYSTEMS.</text>
+  <text x="78" y="500" fill="#06222A" font-family="Arial, Helvetica, sans-serif" font-size="21">National health information systems, built in Trinidad and Tobago.</text>
+  <text x="78" y="566" fill="#06222A" opacity=".7" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" letter-spacing="3">BENCAPRIATA.COM</text>
+  <circle cx="1078" cy="532" r="30" fill="#0D3B3C"/>
+  <circle cx="1078" cy="532" r="12" fill="#FF7A38"/>
+</svg>

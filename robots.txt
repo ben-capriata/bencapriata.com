@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bencapriata.com/sitemap.xml
+

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ben Capriata | Small island, big systems</title>
+<meta name="description" content="Health information systems designed and run from Port of Spain, Trinidad and Tobago. National HIV case-based surveillance, interoperability, and applied AI.">
+
+<link rel="canonical" href="https://bencapriata.com/">
+<meta name="theme-color" content="#0D3B3C">
+<meta name="author" content="Ben Capriata">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ben Capriata">
+<meta property="og:title" content="Ben Capriata | Small island, big systems">
+<meta property="og:description" content="National HIV case-based surveillance, interoperability, and applied AI. Built and run from Port of Spain, Trinidad and Tobago.">
+<meta property="og:url" content="https://bencapriata.com/">
+<meta property="og:image" content="https://bencapriata.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ben Capriata | Small island, big systems">
+<meta name="twitter:description" content="National HIV case-based surveillance, interoperability, and applied AI. Built and run from Port of Spain, Trinidad and Tobago.">
+<meta name="twitter:image" content="https://bencapriata.com/og.png">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230D3B3C'/%3E%3Ccircle cx='16' cy='16' r='6.5' fill='%23FF7A38'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;900&amp;family=Karla:ital,wght@0,400;0,600;0,700;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Ben Capriata",
+  "url": "https://bencapriata.com/",
+  "email": "mailto:bencapriata@gmail.com",
+  "jobTitle": "Senior DHIS2 Implementer",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Port of Spain",
+    "addressCountry": "TT"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/in/ben-capriata",
+    "https://community.dhis2.org/u/bencapriata"
+  ]
+}
+</script>
+
+<style>
+:root{
+  /* grounds */
+  --sea:#0D3B3C;
+  --ink:#06222A;
+  --papaya:#FF7A38;
+  --chalk:#EEF0E9;
+
+  /* record states: this is a legend, not decoration */
+  --raw:#8FA09B;
+  --matched:#7FD2E0;
+  --valid:#6FD08C;
+  --agg:#FF7A38;
+
+  /* diagram */
+  --wire:#2C5F63;
+  --box:#0E3038;
+
+  --display:"Big Shoulders Display", Impact, sans-serif;
+  --body:"Karla", system-ui, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, monospace;
+
+  --pad:clamp(1.25rem, 4vw, 4.5rem);
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--ink);
+  color:var(--chalk);
+  font-family:var(--body);
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit;}
+a:focus-visible{outline:3px solid var(--papaya);outline-offset:6px;}
+
+/* ---------- deck ---------- */
+.deck{
+  height:100svh;
+  overflow-y:scroll;
+  scroll-snap-type:y mandatory;
+  scroll-behavior:smooth;
+}
+.panel{
+  min-height:100svh;
+  scroll-snap-align:start;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:clamp(4rem,9vh,6.5rem) var(--pad) clamp(3rem,7vh,4.5rem);
+  position:relative;
+}
+.p-sea{background:var(--sea);}
+.p-chalk{background:var(--chalk);color:var(--ink);}
+.p-papaya{background:var(--papaya);color:var(--ink);}
+.p-ink{background:var(--ink);}
+.inner{width:100%;max-width:78rem;margin:0 auto;}
+
+/* ---------- type ---------- */
+.huge{
+  font-family:var(--display);
+  font-weight:900;
+  line-height:0.84;
+  letter-spacing:-0.015em;
+  text-transform:uppercase;
+  margin:0;
+  font-size:clamp(3.25rem,13vw,11rem);
+}
+.mid{
+  font-family:var(--display);
+  font-weight:700;
+  line-height:0.92;
+  letter-spacing:-0.01em;
+  text-transform:uppercase;
+  margin:0;
+  font-size:clamp(2.1rem,6.5vw,4.75rem);
+}
+.lede{
+  font-size:clamp(1.02rem,0.95rem+0.45vw,1.3rem);
+  max-width:38ch;
+  margin:1.75rem 0 0;
+}
+.label{
+  font-family:var(--mono);
+  font-size:0.67rem;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  margin:0 0 1.5rem;
+  opacity:0.72;
+}
+.accent{color:var(--papaya);}
+.p-papaya .accent,.p-chalk .accent{color:var(--sea);}
+
+/* ---------- 01 hero ---------- */
+.hero-sub{
+  display:flex;flex-wrap:wrap;gap:0.5rem 2rem;
+  margin-top:2.25rem;
+  font-family:var(--mono);font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;
+}
+.cue{
+  position:absolute;left:var(--pad);bottom:clamp(1.5rem,4vh,2.5rem);
+  font-family:var(--mono);font-size:0.67rem;letter-spacing:0.2em;text-transform:uppercase;opacity:0.7;margin:0;
+}
+.cue span{display:inline-block;animation:nudge 2.4s ease-in-out infinite;}
+@keyframes nudge{0%,100%{transform:translateY(0);}50%{transform:translateY(4px);}}
+
+/* ---------- 03 diagram ---------- */
+.scroller{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;margin-top:1.5rem;}
+.scroller svg{display:block;min-width:46rem;width:100%;height:auto;}
+.swipe{
+  font-family:var(--mono);font-size:0.64rem;letter-spacing:0.16em;text-transform:uppercase;
+  opacity:0.6;margin:0.85rem 0 0;
+}
+@media (min-width:52rem){.swipe{display:none;}}
+
+.node-box{fill:var(--box);stroke:var(--wire);stroke-width:1.1;}
+.node-box.hub{stroke:var(--valid);stroke-width:1.8;}
+.node-kick{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:1.3px;fill:#7FA3A5;}
+.node-name{font-family:"Karla",sans-serif;font-weight:700;font-size:16px;fill:#EEF0E9;}
+.edge{fill:none;stroke:var(--wire);stroke-width:1.3;}
+
+.legend{
+  display:flex;flex-wrap:wrap;gap:0.7rem 2rem;
+  margin-top:1.75rem;padding-top:1.5rem;border-top:1px solid var(--wire);
+  font-family:var(--mono);font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;opacity:0.85;
+}
+.legend span{display:flex;align-items:center;gap:0.55rem;}
+.dot{width:9px;height:9px;border-radius:50%;flex:none;}
+.d-raw{background:var(--raw);}
+.d-matched{background:var(--matched);}
+.d-valid{background:var(--valid);}
+.d-agg{background:var(--agg);}
+
+/* ---------- 04 states ---------- */
+.states{margin:1.5rem 0 0;padding:0;list-style:none;}
+.states li{
+  border-top:2px solid var(--st);
+  padding:1.1rem 0 1.2rem;
+  display:grid;
+  grid-template-columns:minmax(9rem,20%) 1fr;
+  gap:0.25rem 2.5rem;
+  align-items:baseline;
+}
+.states li:last-child{border-bottom:2px solid var(--wire);}
+.states .st-n{
+  font-family:var(--mono);font-size:0.66rem;letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--st);
+}
+.states h3{
+  font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(1.6rem,4.5vw,3rem);line-height:1;margin:0;
+  grid-column:1 / -1;
+}
+.states p{margin:0.45rem 0 0;max-width:56ch;opacity:0.85;font-size:0.97rem;grid-column:1 / -1;}
+@media (min-width:52rem){
+  .states li{grid-template-columns:14rem 1fr;}
+  .states h3{grid-column:1;}
+  .states p{grid-column:2;margin-top:0;}
+  .states .st-n{grid-column:1 / -1;}
+}
+
+/* ---------- 05 spec ---------- */
+.spec{margin:1.75rem 0 0;padding:0;}
+.spec div{
+  display:grid;
+  grid-template-columns:minmax(7rem,10rem) minmax(8rem,13rem) 1fr;
+  gap:0.35rem 2rem;
+  padding:0.95rem 0;
+  border-top:1px solid rgba(13,59,60,0.28);
+  align-items:baseline;
+}
+.spec div:last-child{border-bottom:1px solid rgba(13,59,60,0.28);}
+.spec dt{
+  font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:1.35rem;line-height:1;margin:0;
+}
+.spec .comp{font-family:var(--mono);font-size:0.78rem;line-height:1.6;margin:0;}
+.spec dd{margin:0;font-size:0.95rem;line-height:1.5;opacity:0.85;}
+@media (max-width:44rem){
+  .spec div{grid-template-columns:1fr;gap:0.2rem;}
+}
+
+.deeper{margin:1.75rem 0 0;font-family:var(--mono);font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;}
+.deeper a{text-decoration:none;border-bottom:2px solid var(--papaya);padding-bottom:2px;transition:color .2s ease;}
+.deeper a:hover{color:var(--sea);}
+.deeper a::after{content:" \2192";}
+
+/* ---------- 06 rule ---------- */.rule-panel .huge{max-width:14ch;}
+.sig{font-style:italic;margin-top:2rem;font-size:1.05rem;opacity:0.85;}
+
+/* ---------- 07 contact ---------- */
+.mail{
+  font-family:var(--display);font-weight:700;text-transform:none;
+  font-size:clamp(1.7rem,6.5vw,4.5rem);line-height:1;
+  text-decoration:none;border-bottom:0.09em solid var(--papaya);
+  display:inline-block;word-break:break-word;transition:color .2s ease;
+}
+.mail:hover{color:var(--papaya);}
+.social{
+  margin-top:2.5rem;display:flex;flex-wrap:wrap;gap:1.5rem;
+  font-family:var(--mono);font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;
+}
+.social a{text-decoration:none;border-bottom:1px solid transparent;opacity:0.75;transition:opacity .2s,border-color .2s;}
+.social a:hover{opacity:1;border-bottom-color:var(--papaya);}
+.colophon{margin-top:3rem;font-family:var(--mono);font-size:0.64rem;letter-spacing:0.1em;opacity:0.5;}
+
+/* ---------- counter ---------- */
+.counter{
+  position:fixed;right:var(--pad);bottom:clamp(1.5rem,4vh,2.5rem);z-index:10;
+  font-family:var(--mono);font-size:0.67rem;letter-spacing:0.18em;
+  mix-blend-mode:difference;color:#fff;pointer-events:none;
+}
+
+/* ---------- reveal ---------- */
+.rise{opacity:0;transform:translateY(1.4rem);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.3,1);}
+.rise.in{opacity:1;transform:none;}
+.rise.d1{transition-delay:.1s;}
+.rise.d2{transition-delay:.22s;}
+.rise.d3{transition-delay:.34s;}
+
+@media (prefers-reduced-motion: reduce){
+  .deck{scroll-behavior:auto;scroll-snap-type:none;}
+  .rise{opacity:1;transform:none;transition:none;}
+  .cue span{animation:none;}
+}
+</style>
+</head>
+<body>
+
+<div class="counter" aria-hidden="true"><span id="count">01</span> / 07</div>
+
+<main class="deck" id="deck">
+
+  <!-- 01 -->
+  <section class="panel p-sea" data-n="01">
+    <div class="inner">
+      <p class="label rise d1">Port of Spain, Trinidad and Tobago</p>
+      <h1 class="huge rise d2">Ben<br><span class="accent">Capriata</span></h1>
+      <div class="hero-sub rise d3">
+        <span>Health information systems</span>
+        <span>DHIS2</span>
+        <span>Applied AI</span>
+      </div>
+    </div>
+    <p class="cue"><span>Scroll</span></p>
+  </section>
+
+  <!-- 02 -->
+  <section class="panel p-chalk" data-n="02">
+    <div class="inner">
+      <p class="label rise">The claim</p>
+      <h2 class="huge rise d1">Small island.<br><span class="accent">Big systems.</span></h2>
+      <p class="lede rise d2">
+        One national HIV surveillance system. Five Regional Health Authorities.
+        Designed, built, and kept running from a two-island state of 1.4 million people.
+      </p>
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section class="panel p-ink" data-n="03">
+    <div class="inner">
+      <p class="label rise">How a test result becomes a national number</p>
+
+      <div class="scroller rise d1">
+        <svg id="flow" viewBox="0 0 1240 400" role="img"
+             aria-label="Architecture diagram: facility, laboratory and community testing data flow into an OpenHIM gateway, through JeMPI identity matching and a HAPI FHIR clinical store, into DHIS2 case-based surveillance, and out to a data warehouse and reporting dashboards.">
+
+          <path id="e1" class="edge" d="M190 72 C 240 72, 240 200, 290 200"/>
+          <path id="e2" class="edge" d="M190 200 H 290"/>
+          <path id="e3" class="edge" d="M190 328 C 240 328, 240 200, 290 200"/>
+          <path id="e4" class="edge" d="M460 200 C 510 200, 510 120, 560 120"/>
+          <path id="e5" class="edge" d="M460 200 C 510 200, 510 280, 560 280"/>
+          <path id="e6" class="edge" d="M730 120 C 780 120, 780 200, 830 200"/>
+          <path id="e7" class="edge" d="M730 280 C 780 280, 780 200, 830 200"/>
+          <path id="e8" class="edge" d="M1000 200 C 1025 200, 1025 120, 1050 120"/>
+          <path id="e9" class="edge" d="M1000 200 C 1025 200, 1025 280, 1050 280"/>
+
+          <g><rect class="node-box" x="20" y="40" width="170" height="64" rx="3"/>
+             <text class="node-kick" x="38" y="66">POINT OF CARE</text>
+             <text class="node-name" x="38" y="88">Testing register</text></g>
+
+          <g><rect class="node-box" x="20" y="168" width="170" height="64" rx="3"/>
+             <text class="node-kick" x="38" y="194">LABORATORY</text>
+             <text class="node-name" x="38" y="216">LIS results</text></g>
+
+          <g><rect class="node-box" x="20" y="296" width="170" height="64" rx="3"/>
+             <text class="node-kick" x="38" y="322">COMMUNITY</text>
+             <text class="node-name" x="38" y="344">Rapid testing</text></g>
+
+          <g><rect class="node-box" x="290" y="168" width="170" height="64" rx="3"/>
+             <text class="node-kick" x="308" y="194">GATEWAY</text>
+             <text class="node-name" x="308" y="216">OpenHIM</text></g>
+
+          <g><rect class="node-box" x="560" y="88" width="170" height="64" rx="3"/>
+             <text class="node-kick" x="578" y="114">IDENTITY</text>
+             <text class="node-name" x="578" y="136">JeMPI</text></g>
+
+          <g><rect class="node-box" x="560" y="248" width="170" height="64" rx="3"/>
+             <text class="node-kick" x="578" y="274">CLINICAL STORE</text>
+             <text class="node-name" x="578" y="296">HAPI FHIR</text></g>
+
+          <g><rect class="node-box hub" x="830" y="168" width="170" height="64" rx="3"/>
+             <text class="node-kick" x="848" y="194">SURVEILLANCE</text>
+             <text class="node-name" x="848" y="216">DHIS2 Tracker</text></g>
+
+          <g><rect class="node-box" x="1050" y="88" width="170" height="64" rx="3"/>
+             <text class="node-kick" x="1068" y="114">STORAGE</text>
+             <text class="node-name" x="1068" y="136">Data warehouse</text></g>
+
+          <g><rect class="node-box" x="1050" y="248" width="170" height="64" rx="3"/>
+             <text class="node-kick" x="1068" y="274">REPORTING</text>
+             <text class="node-name" x="1068" y="296">Dashboards, MER</text></g>
+
+          <circle r="4.5" fill="#8FA09B"><animateMotion dur="3s" repeatCount="indefinite" begin="0s"><mpath href="#e1"/></animateMotion></circle>
+          <circle r="4.5" fill="#8FA09B"><animateMotion dur="3s" repeatCount="indefinite" begin="0.9s"><mpath href="#e2"/></animateMotion></circle>
+          <circle r="4.5" fill="#8FA09B"><animateMotion dur="3s" repeatCount="indefinite" begin="1.8s"><mpath href="#e3"/></animateMotion></circle>
+          <circle r="4.5" fill="#8FA09B"><animateMotion dur="2.4s" repeatCount="indefinite" begin="0.6s"><mpath href="#e4"/></animateMotion></circle>
+          <circle r="4.5" fill="#8FA09B"><animateMotion dur="2.4s" repeatCount="indefinite" begin="1.5s"><mpath href="#e5"/></animateMotion></circle>
+          <circle r="4.5" fill="#7FD2E0"><animateMotion dur="2.4s" repeatCount="indefinite" begin="0.3s"><mpath href="#e6"/></animateMotion></circle>
+          <circle r="4.5" fill="#7FD2E0"><animateMotion dur="2.4s" repeatCount="indefinite" begin="1.2s"><mpath href="#e7"/></animateMotion></circle>
+          <circle r="4.5" fill="#6FD08C"><animateMotion dur="1.8s" repeatCount="indefinite" begin="0s"><mpath href="#e8"/></animateMotion></circle>
+          <circle r="4.5" fill="#FF7A38"><animateMotion dur="1.8s" repeatCount="indefinite" begin="0.9s"><mpath href="#e9"/></animateMotion></circle>
+        </svg>
+      </div>
+      <p class="swipe">Swipe the diagram sideways</p>
+
+      <div class="legend rise d2">
+        <span><i class="dot d-raw"></i>Raw submission</span>
+        <span><i class="dot d-matched"></i>Identity matched</span>
+        <span><i class="dot d-valid"></i>Validated case</span>
+        <span><i class="dot d-agg"></i>Aggregated for reporting</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section class="panel p-sea" data-n="04">
+    <div class="inner">
+      <p class="label rise">Four things, or the number is wrong</p>
+      <ul class="states">
+        <li class="rise d1" style="--st:var(--raw)">
+          <span class="st-n">01 / Raw submission</span>
+          <h3>Capture</h3>
+          <p>Forms that match the paper register the clinic already uses, so nobody transcribes anything twice.</p>
+        </li>
+        <li class="rise d1" style="--st:var(--matched)">
+          <span class="st-n">02 / Identity matched</span>
+          <h3>Match</h3>
+          <p>Resolution across facilities, laboratories, and community sites. Without it, one patient becomes four cases.</p>
+        </li>
+        <li class="rise d2" style="--st:var(--valid)">
+          <span class="st-n">03 / Validated case</span>
+          <h3>Validate</h3>
+          <p>Program rules at the point of entry, not a cleaning script three months later when the deadline hits.</p>
+        </li>
+        <li class="rise d2" style="--st:var(--agg)">
+          <span class="st-n">04 / Aggregated</span>
+          <h3>Report</h3>
+          <p>Indicators a programme manager can defend in a meeting, traceable back to the record that produced them.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 05 -->
+  <section class="panel p-chalk" data-n="05">
+    <div class="inner">
+      <p class="label rise">System of record</p>
+      <h2 class="mid rise d1">Harmony &amp; Heart</h2>
+      <p class="lede rise d1">
+        National HIV case-based surveillance and data warehouse, delivered with CDC, HRSA, and I-TECH.
+        In production across all five Regional Health Authorities. Nominated for the IDB PRAISE 2025 innovation award.
+      </p>
+      <dl class="spec rise d2">
+        <div>
+          <dt>Care</dt>
+          <dd class="comp">DHIS2 Tracker</dd>
+          <dd>Testing register, ART dataset entry, rapid testing site management, custom entry and print apps</dd>
+        </div>
+        <div>
+          <dt>Identity</dt>
+          <dd class="comp">JeMPI</dd>
+          <dd>Patient matching across facilities, laboratories, and community sites</dd>
+        </div>
+        <div>
+          <dt>Exchange</dt>
+          <dd class="comp">OpenHIM<br>HAPI FHIR</dd>
+          <dd>Mediated messaging between systems and a standards-based clinical data store</dd>
+        </div>
+        <div>
+          <dt>Pipelines</dt>
+          <dd class="comp">OpenFn Lightning</dd>
+          <dd>Self-hosted inside the ministry network, including DHIS2-to-DHIS2 and SFTP ingestion</dd>
+        </div>
+        <div>
+          <dt>Analytics</dt>
+          <dd class="comp">SQL Server<br>Power BI, Python</dd>
+          <dd>Warehouse modelling, programme dashboards, PEPFAR MER reporting</dd>
+        </div>
+      </dl>
+      <p class="deeper rise d3"><a href="work/">Full technical detail, system by system</a></p>
+    </div>
+  </section>
+
+  <!-- 06 -->
+  <section class="panel p-papaya rule-panel" data-n="06">
+    <div class="inner">
+      <p class="label rise">One rule, non-negotiable</p>
+      <h2 class="huge rise d1">It has to make somebody smile.</h2>
+      <p class="sig rise d2">Public health software has a reputation. I am trying to ruin it.</p>
+    </div>
+  </section>
+
+  <!-- 07 -->
+  <section class="panel p-ink" data-n="07">
+    <div class="inner">
+      <p class="label rise">Consulting across the Caribbean</p>
+      <h2 class="mid rise d1" style="max-width:16ch">Bring me the implementation that stalled.</h2>
+      <a class="mail rise d2" href="mailto:bencapriata@gmail.com" style="margin-top:2rem">bencapriata@gmail.com</a>
+      <div class="social rise d3">
+        <a href="https://www.linkedin.com/in/ben-capriata" target="_blank" rel="me noopener">LinkedIn</a>
+        <a href="https://community.dhis2.org/u/bencapriata" target="_blank" rel="me noopener">DHIS2 Community</a>
+      </div>
+      <p class="colophon">Built in Port of Spain, Trinidad and Tobago.</p>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function(){
+  var deck = document.getElementById('deck');
+  var count = document.getElementById('count');
+  var panels = [].slice.call(document.querySelectorAll('.panel'));
+  var rises = [].slice.call(document.querySelectorAll('.rise'));
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (reduce) {
+    var svg = document.getElementById('flow');
+    if (svg && svg.pauseAnimations) svg.pauseAnimations();
+  }
+
+  if (!('IntersectionObserver' in window)) {
+    rises.forEach(function(el){ el.classList.add('in'); });
+    return;
+  }
+
+  var revealer = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { root: deck, threshold: 0.2 });
+  rises.forEach(function(el){ revealer.observe(el); });
+
+  var counter = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting && e.intersectionRatio > 0.5) count.textContent = e.target.dataset.n;
+    });
+  }, { root: deck, threshold: [0.5] });
+  panels.forEach(function(p){ counter.observe(p); });
+})();
+</script>
+
+</body>
+</html>

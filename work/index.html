@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Selected work | Ben Capriata</title>
+<meta name="description" content="Senior DHIS2 implementer at the HIV/AIDS Coordinating Unit, Ministry of Health, Trinidad and Tobago. National case-based surveillance, interoperability, and applied AI for Caribbean health programmes.">
+
+<link rel="canonical" href="https://bencapriata.com/work/">
+<meta name="theme-color" content="#0A1E2B">
+<meta name="author" content="Ben Capriata">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ben Capriata">
+<meta property="og:title" content="Selected work | Ben Capriata">
+<meta property="og:description" content="National case-based surveillance, interoperability, and applied AI for Caribbean health programmes.">
+<meta property="og:url" content="https://bencapriata.com/work/">
+<meta property="og:image" content="https://bencapriata.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230D3B3C'/%3E%3Ccircle cx='16' cy='16' r='6.5' fill='%23FF7A38'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#0A1E2B;
+  --ink-lift:#10303F;
+  --ink-line:#1C4152;
+  --sea:#E7EFEA;
+  --teal:#2FB79E;
+  --gold:#E9B44C;
+  --mute:#8FA8B2;
+
+  --display:"Bricolage Grotesque", system-ui, sans-serif;
+  --body:"Source Serif 4", Georgia, serif;
+  --mono:"JetBrains Mono", ui-monospace, monospace;
+
+  --pad:clamp(1.25rem, 5vw, 6rem);
+  --stack:clamp(4rem, 10vw, 8rem);
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--sea);
+  font-family:var(--body);
+  font-size:clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+
+a{color:inherit;}
+a:focus-visible, button:focus-visible{
+  outline:2px solid var(--gold);
+  outline-offset:4px;
+  border-radius:2px;
+}
+
+.wrap{max-width:70rem;margin:0 auto;padding-inline:var(--pad);}
+.back{
+  position:absolute;
+  top:clamp(1.25rem,3vw,2.25rem);
+  left:var(--pad);
+  font-family:var(--mono);
+  font-size:0.7rem;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--mute);
+  text-decoration:none;
+  transition:color .2s ease;
+}
+.back:hover{color:var(--sea);}
+
+/* ---------- shared type ---------- */
+.eyebrow{
+  font-family:var(--mono);
+  font-size:0.7rem;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--teal);
+  margin:0 0 1.25rem;
+}
+.section-title{
+  font-family:var(--display);
+  font-weight:800;
+  font-size:clamp(1.5rem, 1.1rem + 1.6vw, 2.25rem);
+  line-height:1.1;
+  letter-spacing:-0.02em;
+  margin:0 0 2.5rem;
+}
+.rule{height:1px;background:var(--ink-line);border:0;margin:0;}
+
+/* ---------- hero ---------- */
+.hero{padding-block:clamp(4rem, 12vw, 9rem) clamp(3rem, 8vw, 6rem);}
+.hero-name{
+  font-family:var(--display);
+  font-weight:800;
+  font-size:clamp(3rem, 1.5rem + 9vw, 8rem);
+  line-height:0.92;
+  letter-spacing:-0.045em;
+  margin:0 0 1.5rem;
+}
+.hero-name .surname{color:var(--teal);}
+.hero-thesis{
+  font-size:clamp(1.25rem, 1rem + 1.1vw, 1.75rem);
+  line-height:1.35;
+  max-width:34ch;
+  margin:0 0 3rem;
+}
+.hero-thesis em{font-style:italic;color:var(--gold);}
+
+/* ---------- the record: signature element ---------- */
+.record{
+  border-top:1px solid var(--ink-line);
+  max-width:56rem;
+}
+.record-row{
+  display:grid;
+  grid-template-columns:9.5rem 1fr;
+  gap:0.5rem 2rem;
+  padding:0.9rem 0;
+  border-bottom:1px solid var(--ink-line);
+  align-items:baseline;
+}
+.record-key{
+  font-family:var(--mono);
+  font-size:0.68rem;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--mute);
+}
+.record-val{margin:0;font-size:1rem;line-height:1.5;}
+.record-val .flag{color:var(--gold);}
+
+@media (max-width:34rem){
+  .record-row{grid-template-columns:1fr;gap:0.25rem;padding:0.8rem 0;}
+}
+
+/* load sequence: the fields populate, like a form filling in */
+.pop{opacity:0;animation:pop 0.55s cubic-bezier(.2,.7,.3,1) forwards;}
+.pop-1{animation-delay:0.15s;}
+.pop-2{animation-delay:0.30s;}
+.pop-3{animation-delay:0.45s;}
+.pop-4{animation-delay:0.60s;}
+.pop-5{animation-delay:0.75s;}
+@keyframes pop{
+  from{opacity:0;transform:translateY(0.6rem);}
+  to{opacity:1;transform:none;}
+}
+
+/* ---------- capabilities ---------- */
+.band{padding-block:var(--stack);}
+.cols{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(15rem, 1fr));
+  gap:clamp(2rem, 4vw, 3.5rem);
+}
+.col h3{
+  font-family:var(--display);
+  font-weight:600;
+  font-size:1.15rem;
+  letter-spacing:-0.01em;
+  margin:0 0 0.75rem;
+  padding-top:1rem;
+  border-top:2px solid var(--gold);
+}
+.col p{margin:0;color:#C8D8D2;}
+
+/* ---------- work records (inverted band) ---------- */
+.invert{background:var(--sea);color:var(--ink);}
+.invert .eyebrow{color:#0F6E5E;}
+.invert .record{border-top-color:#C3D3CC;}
+.invert .record-row{border-bottom-color:#C3D3CC;}
+.invert .record-key{color:#5C7A72;}
+
+.entry{padding:2.25rem 0;border-bottom:1px solid #C3D3CC;}
+.entry:first-of-type{border-top:1px solid #C3D3CC;}
+.entry-head{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:0.5rem 1rem;
+  margin-bottom:0.85rem;
+}
+.entry-head h3{
+  font-family:var(--display);
+  font-weight:600;
+  font-size:clamp(1.2rem, 1rem + 0.8vw, 1.6rem);
+  letter-spacing:-0.02em;
+  margin:0;
+  flex:1 1 18rem;
+}
+.tag{
+  font-family:var(--mono);
+  font-size:0.68rem;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  padding:0.28rem 0.55rem;
+  border:1px solid #0A1E2B;
+  white-space:nowrap;
+}
+.tag.code{background:var(--ink);color:var(--sea);border-color:var(--ink);}
+.entry p{margin:0;max-width:62ch;}
+.entry .note{
+  margin-top:0.85rem;
+  font-family:var(--mono);
+  font-size:0.75rem;
+  line-height:1.5;
+  color:#3E5F58;
+}
+
+/* ---------- consulting ---------- */
+.pitch{max-width:44rem;}
+.pitch p{margin:0 0 1.25rem;}
+.list{list-style:none;padding:0;margin:2rem 0 0;}
+.list li{
+  padding:0.85rem 0;
+  border-top:1px solid var(--ink-line);
+  display:grid;
+  grid-template-columns:2.5rem 1fr;
+  gap:1rem;
+}
+.list li:last-child{border-bottom:1px solid var(--ink-line);}
+.list .num{font-family:var(--mono);font-size:0.75rem;color:var(--gold);padding-top:0.25rem;}
+
+/* ---------- aside ---------- */
+.aside{padding-block:var(--stack);}
+.aside p{
+  font-size:clamp(1.15rem, 1rem + 0.7vw, 1.5rem);
+  line-height:1.45;
+  max-width:38ch;
+  margin:0;
+}
+.aside .gold{color:var(--gold);}
+
+/* ---------- contact ---------- */
+.contact{padding-block:var(--stack) clamp(3rem,6vw,5rem);}
+.mailto{
+  font-family:var(--display);
+  font-weight:600;
+  font-size:clamp(1.5rem, 1rem + 3vw, 3.25rem);
+  letter-spacing:-0.03em;
+  text-decoration:none;
+  color:var(--sea);
+  border-bottom:3px solid var(--teal);
+  display:inline-block;
+  line-height:1.15;
+  word-break:break-word;
+  transition:color 0.2s ease, border-color 0.2s ease;
+}
+.mailto:hover{color:var(--gold);border-color:var(--gold);}
+.links{
+  margin-top:2.5rem;
+  display:flex;
+  flex-wrap:wrap;
+  gap:1.5rem;
+  font-family:var(--mono);
+  font-size:0.75rem;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+}
+.links a{color:var(--mute);text-decoration:none;border-bottom:1px solid transparent;transition:color .2s, border-color .2s;}
+.links a:hover{color:var(--sea);border-bottom-color:var(--teal);}
+.colophon{
+  margin-top:4rem;
+  font-family:var(--mono);
+  font-size:0.7rem;
+  color:#5F7C88;
+  letter-spacing:0.06em;
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  .pop{opacity:1;animation:none;}
+  *{transition-duration:0.01ms !important;}
+}
+</style>
+</head>
+<body>
+
+<a class="back" href="../" aria-label="Back to home">&larr; Home</a>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow pop pop-1">Port of Spain, Trinidad and Tobago</p>
+
+    <h1 class="hero-name pop pop-2">Ben<br><span class="surname">Capriata</span></h1>
+
+    <p class="hero-thesis pop pop-3">
+      I build the health information systems that national programmes
+      <em>actually run on</em>, and the analytics that turn them into decisions.
+    </p>
+
+    <div class="record">
+      <div class="record-row pop pop-4">
+        <span class="record-key">Role</span>
+        <p class="record-val">Senior DHIS2 implementer, HIV/AIDS Coordinating Unit, Ministry of Health</p>
+      </div>
+      <div class="record-row pop pop-4">
+        <span class="record-key">Focus</span>
+        <p class="record-val">Case-based surveillance, health data interoperability, applied AI</p>
+      </div>
+      <div class="record-row pop pop-5">
+        <span class="record-key">Toolkit</span>
+        <p class="record-val">DHIS2, SQL Server, Python, OpenHIM, HAPI FHIR, OpenFn, Power BI</p>
+      </div>
+      <div class="record-row pop pop-5">
+        <span class="record-key">Status</span>
+        <p class="record-val"><span class="flag">Open</span> to consulting work across the Caribbean</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ CAPABILITIES ============ -->
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow">What I do</p>
+    <h2 class="section-title">Three things, done properly.</h2>
+    <div class="cols">
+      <div class="col">
+        <h3>Design the system</h3>
+        <p>Tracker programmes, metadata dictionaries, indicator sets, and data entry forms that field staff can use without a manual. The unglamorous part is where implementations succeed or fail.</p>
+      </div>
+      <div class="col">
+        <h3>Connect the systems</h3>
+        <p>OpenHIE-style interoperability layers so laboratory, facility, and surveillance data stop living in separate buildings. Built to run on real ministry infrastructure, including air-gapped networks.</p>
+      </div>
+      <div class="col">
+        <h3>Make it answer questions</h3>
+        <p>Reporting, dashboards, and AI-assisted analysis that a programme manager can act on the same morning, not a quarter later.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WORK ============ -->
+<section class="band invert">
+  <div class="wrap">
+    <p class="eyebrow">Selected work</p>
+    <h2 class="section-title">Systems in production.</h2>
+
+    <article class="entry">
+      <div class="entry-head">
+        <h3>Harmony &amp; Heart Initiative</h3>
+        <span class="tag code">HH-CBS-01</span>
+        <span class="tag">National system</span>
+      </div>
+      <p>A DHIS2 HIV case-based surveillance system and data warehouse running across all five Regional Health Authorities, delivered with CDC, HRSA, and I-TECH. It is the backbone of national HIV programme reporting in Trinidad and Tobago.</p>
+      <p class="note">Nominated for the IDB PRAISE 2025 innovation award.</p>
+    </article>
+
+    <article class="entry">
+      <div class="entry-head">
+        <h3>Rapid Testing site management</h3>
+        <span class="tag code">RT-SITE</span>
+        <span class="tag">Tracker programme</span>
+      </div>
+      <p>Site registration, coded site identifiers, facility tracking, and an SPI-RRT audit stage, so quality assurance visits produce structured data instead of a folder of scanned forms.</p>
+    </article>
+
+    <article class="entry">
+      <div class="entry-head">
+        <h3>Interoperability layer</h3>
+        <span class="tag code">OHIE-01</span>
+        <span class="tag">Integration server</span>
+      </div>
+      <p>OpenHIM, JeMPI, HAPI FHIR, and a self-hosted OpenFn Lightning instance, standing up DHIS2-to-DHIS2 and SFTP-to-DHIS2 pipelines inside a restricted ministry network.</p>
+    </article>
+
+    <article class="entry">
+      <div class="entry-head">
+        <h3>Custom DHIS2 applications</h3>
+        <span class="tag code">APP-SUITE</span>
+        <span class="tag">Application set</span>
+      </div>
+      <p>Print-ready register and audit report apps, user management tooling for laboratory staff, and reporting templates built to match the documents clinics already recognise.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ============ CONSULTING ============ -->
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow">Consulting</p>
+    <h2 class="section-title">Available for Caribbean engagements.</h2>
+    <div class="pitch">
+      <p>Most health data problems in the region are not really technology problems. They are questions of design, ownership, and whether anyone trusts the number at the end. I take on work where those questions matter as much as the code.</p>
+      <ol class="list">
+        <li><span class="num">01</span><span>DHIS2 implementation, from metadata design through to pilot and training.</span></li>
+        <li><span class="num">02</span><span>Interoperability architecture and integration pipelines between existing systems.</span></li>
+        <li><span class="num">03</span><span>Analytics, reporting automation, and practical AI tooling for programme teams.</span></li>
+        <li><span class="num">04</span><span>Technical review of an implementation that has stalled, with a written way forward.</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ ASIDE ============ -->
+<section class="aside">
+  <div class="wrap">
+    <p class="eyebrow">Off the clock</p>
+    <p>Classical music, usually chosen to match whatever I am reading. And one working rule I refuse to negotiate: <span class="gold">whatever I build has to make somebody smile.</span></p>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ CONTACT ============ -->
+<footer class="contact">
+  <div class="wrap">
+    <p class="eyebrow">Get in touch</p>
+    <a class="mailto" href="mailto:bencapriata@gmail.com">bencapriata@gmail.com</a>
+    <div class="links">
+      <a href="https://www.linkedin.com/in/ben-capriata" target="_blank" rel="me noopener">LinkedIn</a>
+      <a href="https://community.dhis2.org/u/bencapriata" target="_blank" rel="me noopener">DHIS2 Community</a>
+    </div>
+    <p class="colophon">Built in Port of Spain, Trinidad and Tobago.</p>
+  </div>
+</footer>
+
+</body>
+</html>
